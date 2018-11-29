@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "BCPhotoRecord"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "拍照和拍短视频"
   spec.description  = "拍照和拍摄短视频"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
@@ -12,5 +12,8 @@ Pod::Spec.new do |spec|
   
   spec.swift_version  = "4.2"
   spec.platform       = :ios, "10.0"
+
+  spec.framework    = "UIKit"
   spec.source_files = "BCPhotoRecord/*"
+  spec.resource_bundles = {"BCPhotoRecord" => "BCPhotoRecord/images/*"}
 end
