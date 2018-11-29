@@ -51,7 +51,6 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         avPlayer?.pause()
         avPlayer = nil
-        debugPrint("😊deinit")
     }
     
     override func viewDidLoad() {

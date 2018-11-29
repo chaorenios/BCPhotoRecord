@@ -55,8 +55,8 @@ class BCPhotoRecordControl: UIView, BCPhotoRecordButtonDelegate {
                 leftImageName = String(format: "back@%dx.png", scale)
                 rightImageName = String(format: "confirm@%dx.png", scale)
             }
-            let leftPath = Bundle.main.path(forResource: leftImageName, ofType: nil, inDirectory: "images.bundle")
-            let rightPath = Bundle.main.path(forResource: rightImageName, ofType: nil, inDirectory: "images.bundle")
+            let leftPath = Bundle.main.path(forResource: leftImageName, ofType: nil)
+            let rightPath = Bundle.main.path(forResource: rightImageName, ofType: nil)
             backButton.setImage(UIImage(contentsOfFile: leftPath!), for: .normal)
             confirmButton.setImage(UIImage(contentsOfFile: rightPath!), for: .normal)
         }
