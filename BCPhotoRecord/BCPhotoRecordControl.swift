@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol BCPhotoRecordControlDelegate {
+@objc public protocol BCPhotoRecordControlDelegate {
     func shoot()
     func startRecording()
     func stopRecording()
@@ -18,7 +18,7 @@ import UIKit
     func confirm()
 }
 
-class BCPhotoRecordControl: UIView, BCPhotoRecordButtonDelegate {
+public class BCPhotoRecordControl: UIView, BCPhotoRecordButtonDelegate {
     
     weak var photoRecord: BCPhotoRecord? {
         didSet {
@@ -62,7 +62,7 @@ class BCPhotoRecordControl: UIView, BCPhotoRecordButtonDelegate {
         }
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         
         prButton.delegate = self
@@ -108,7 +108,7 @@ protocol BCPhotoRecordButtonDelegate {
     func stopLongPress()
 }
 
-class BCPhotoRecordButton: UIView {
+public class BCPhotoRecordButton: UIView {
     
     weak var photoRecord: BCPhotoRecord?
     
@@ -130,7 +130,7 @@ class BCPhotoRecordButton: UIView {
         super.init(coder: aDecoder)
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         initUI()
     }

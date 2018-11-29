@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-enum BCPhotoRecordOption {
+public enum BCPhotoRecordOption {
     case all
     case photo
     case record
@@ -17,7 +17,7 @@ enum BCPhotoRecordOption {
 
 typealias BCPhotoRecordCompletion = (UIImage?, URL?) -> Void
 
-class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
+public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
 
     var option = BCPhotoRecordOption.all
     var completion: BCPhotoRecordCompletion?
@@ -53,7 +53,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         avPlayer = nil
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         controlView.photoRecord = self
         controlView.delegate = self
@@ -96,7 +96,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
     }
     
     // MARK: - 拍摄控制
-    func shoot() {
+    public func shoot() {
         DispatchQueue.main.async {
             self.captureSession.stopRunning()
         }
@@ -118,20 +118,20 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         }
     }
     
-    func startRecording() {
+    public func startRecording() {
         let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("cMovie.mov")
         captureVideoOutput.startRecording(to: url, recordingDelegate: self)
     }
     
-    func stopRecording() {
+    public func stopRecording() {
         captureVideoOutput.stopRecording()
     }
     
-    func close() {
+    public func close() {
         dismiss(animated: true, completion: nil)
     }
     
-    func back() {
+    public func back() {
         // 拍照还原
         confirmPhoto = nil
         
@@ -151,7 +151,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         }
     }
     
-    func change() {
+    public func change() {
         DispatchQueue.main.async {
             self.captureSession.stopRunning()
             let position = self.captureDeviceInput.device.position
@@ -179,7 +179,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         }
     }
     
-    func confirm() {
+    public func confirm() {
         completion?(confirmPhoto, confirmRecordURL)
     }
     
@@ -254,7 +254,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
     // MARK: - 拍摄完成代理方法
     /*拍照*/
     @available(iOS 11.0, *)
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+    private func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {
             let image = UIImage(data: imageData)
             previewPhoto(image!)
@@ -262,7 +262,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
     }
     
     @available(iOS 10.0, *)
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    private func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         if let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer) {
             let image = UIImage(data: imageData)
             previewPhoto(image!)
@@ -270,7 +270,7 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
     }
     
     // MARK: - 录制视频
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+    public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         previewVideo(outputFileURL)
     }
     
