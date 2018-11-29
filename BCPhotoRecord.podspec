@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "BCPhotoRecord"
-  spec.version      = "1.0.7"
+  spec.version      = "1.0.8"
   spec.summary      = "拍照和拍短视频"
   spec.description  = "拍照和拍摄短视频"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
