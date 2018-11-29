@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF119A2221AF8E71005F8A29 /* PhotoRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF119A1721AF8E71005F8A29 /* PhotoRecord.storyboard */; };
+		BF119A2321AF8E71005F8A29 /* BCPhotoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF119A1821AF8E71005F8A29 /* BCPhotoRecord.swift */; };
+		BF119A2421AF8E71005F8A29 /* BCPhotoRecordControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF119A1921AF8E71005F8A29 /* BCPhotoRecordControl.swift */; };
+		BF119A3E21AF92C7005F8A29 /* images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BF119A3D21AF92C7005F8A29 /* images.bundle */; };
 		BF32D1F821AF80230021FD6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32D1F721AF80230021FD6C /* AppDelegate.swift */; };
 		BF32D1FA21AF80230021FD6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32D1F921AF80230021FD6C /* ViewController.swift */; };
 		BF32D1FD21AF80230021FD6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF32D1FB21AF80230021FD6C /* Main.storyboard */; };
 		BF32D1FF21AF80240021FD6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF32D1FE21AF80240021FD6C /* Assets.xcassets */; };
 		BF32D20221AF80240021FD6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF32D20021AF80240021FD6C /* LaunchScreen.storyboard */; };
-		BF32D21721AF80A80021FD6C /* PhotoRecord.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF32D21321AF80A80021FD6C /* PhotoRecord.xcassets */; };
-		BF32D21821AF80A80021FD6C /* PhotoRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF32D21421AF80A80021FD6C /* PhotoRecord.storyboard */; };
-		BF32D21921AF80A80021FD6C /* BCPhotoRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32D21521AF80A80021FD6C /* BCPhotoRecord.swift */; };
-		BF32D21A21AF80A80021FD6C /* BCPhotoRecordControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF32D21621AF80A80021FD6C /* BCPhotoRecordControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF119A1721AF8E71005F8A29 /* PhotoRecord.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoRecord.storyboard; sourceTree = "<group>"; };
+		BF119A1821AF8E71005F8A29 /* BCPhotoRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCPhotoRecord.swift; sourceTree = "<group>"; };
+		BF119A1921AF8E71005F8A29 /* BCPhotoRecordControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCPhotoRecordControl.swift; sourceTree = "<group>"; };
+		BF119A3D21AF92C7005F8A29 /* images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = images.bundle; sourceTree = "<group>"; };
 		BF32D1F421AF80230021FD6C /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF32D1F721AF80230021FD6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF32D1F921AF80230021FD6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,10 +30,6 @@
 		BF32D1FE21AF80240021FD6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF32D20121AF80240021FD6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF32D20321AF80240021FD6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BF32D21321AF80A80021FD6C /* PhotoRecord.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PhotoRecord.xcassets; sourceTree = "<group>"; };
-		BF32D21421AF80A80021FD6C /* PhotoRecord.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoRecord.storyboard; sourceTree = "<group>"; };
-		BF32D21521AF80A80021FD6C /* BCPhotoRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCPhotoRecord.swift; sourceTree = "<group>"; };
-		BF32D21621AF80A80021FD6C /* BCPhotoRecordControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCPhotoRecordControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +43,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF119A0D21AF8E71005F8A29 /* BCPhotoRecord */ = {
+			isa = PBXGroup;
+			children = (
+				BF119A1721AF8E71005F8A29 /* PhotoRecord.storyboard */,
+				BF119A1821AF8E71005F8A29 /* BCPhotoRecord.swift */,
+				BF119A1921AF8E71005F8A29 /* BCPhotoRecordControl.swift */,
+				BF119A3D21AF92C7005F8A29 /* images.bundle */,
+			);
+			name = BCPhotoRecord;
+			path = ../../BCPhotoRecord;
+			sourceTree = "<group>";
+		};
 		BF32D1EB21AF80230021FD6C = {
 			isa = PBXGroup;
 			children = (
@@ -62,7 +74,7 @@
 		BF32D1F621AF80230021FD6C /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				BF32D21221AF80A80021FD6C /* BCPhotoRecord */,
+				BF119A0D21AF8E71005F8A29 /* BCPhotoRecord */,
 				BF32D1F721AF80230021FD6C /* AppDelegate.swift */,
 				BF32D1F921AF80230021FD6C /* ViewController.swift */,
 				BF32D1FB21AF80230021FD6C /* Main.storyboard */,
@@ -71,18 +83,6 @@
 				BF32D20321AF80240021FD6C /* Info.plist */,
 			);
 			path = Demo;
-			sourceTree = "<group>";
-		};
-		BF32D21221AF80A80021FD6C /* BCPhotoRecord */ = {
-			isa = PBXGroup;
-			children = (
-				BF32D21321AF80A80021FD6C /* PhotoRecord.xcassets */,
-				BF32D21421AF80A80021FD6C /* PhotoRecord.storyboard */,
-				BF32D21521AF80A80021FD6C /* BCPhotoRecord.swift */,
-				BF32D21621AF80A80021FD6C /* BCPhotoRecordControl.swift */,
-			);
-			name = BCPhotoRecord;
-			path = ../../BCPhotoRecord;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +143,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF32D21821AF80A80021FD6C /* PhotoRecord.storyboard in Resources */,
 				BF32D20221AF80240021FD6C /* LaunchScreen.storyboard in Resources */,
-				BF32D21721AF80A80021FD6C /* PhotoRecord.xcassets in Resources */,
+				BF119A2221AF8E71005F8A29 /* PhotoRecord.storyboard in Resources */,
+				BF119A3E21AF92C7005F8A29 /* images.bundle in Resources */,
 				BF32D1FF21AF80240021FD6C /* Assets.xcassets in Resources */,
 				BF32D1FD21AF80230021FD6C /* Main.storyboard in Resources */,
 			);
@@ -158,10 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF32D21A21AF80A80021FD6C /* BCPhotoRecordControl.swift in Sources */,
+				BF119A2421AF8E71005F8A29 /* BCPhotoRecordControl.swift in Sources */,
 				BF32D1FA21AF80230021FD6C /* ViewController.swift in Sources */,
 				BF32D1F821AF80230021FD6C /* AppDelegate.swift in Sources */,
-				BF32D21921AF80A80021FD6C /* BCPhotoRecord.swift in Sources */,
+				BF119A2321AF8E71005F8A29 /* BCPhotoRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4HWXS9UKBB;
 				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,6 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4HWXS9UKBB;
 				INFOPLIST_FILE = Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

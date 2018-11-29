@@ -44,18 +44,21 @@ class BCPhotoRecordControl: UIView, BCPhotoRecordButtonDelegate {
     weak var delegate: BCPhotoRecordControlDelegate?
     var isWillConfirm = false {
         didSet {
-            var backImageName = "close"
-            var confirmImageName = "change"
+            let scale = Int(UIScreen.main.scale)
+            var leftImageName = String(format: "close@%dx.png", scale)
+            var rightImageName = String(format: "change@%dx.png", scale)
             messageLabel.isHidden = false
             prButton.isHidden = false
             if isWillConfirm {
                 prButton.isHidden = true
                 messageLabel.isHidden = true
-                backImageName = "back"
-                confirmImageName = "confirm"
+                leftImageName = String(format: "back@%dx.png", scale)
+                rightImageName = String(format: "confirm@%dx.png", scale)
             }
-            backButton.setImage(UIImage(named: backImageName), for: .normal)
-            confirmButton.setImage(UIImage(named: confirmImageName), for: .normal)
+            let leftPath = Bundle.main.path(forResource: leftImageName, ofType: nil, inDirectory: "images.bundle")
+            let rightPath = Bundle.main.path(forResource: rightImageName, ofType: nil, inDirectory: "images.bundle")
+            backButton.setImage(UIImage(contentsOfFile: leftPath!), for: .normal)
+            confirmButton.setImage(UIImage(contentsOfFile: rightPath!), for: .normal)
         }
     }
     
@@ -63,6 +66,7 @@ class BCPhotoRecordControl: UIView, BCPhotoRecordButtonDelegate {
         super.awakeFromNib()
         
         prButton.delegate = self
+        isWillConfirm = false
     }
     
     func tap() {

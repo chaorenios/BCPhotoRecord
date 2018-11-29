@@ -283,12 +283,14 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         case .notDetermined:
             // 未选择，请求摄像头授权
             AVCaptureDevice.requestAccess(for: .video) { (status) in
-                if status {
-                    // 允许，验证麦克风权限
-                    self.authAudio()
-                } else {
-                    // 拒绝
-                    self.showAuthResult("您已拒绝访问相机权限，如需使用请在设置->隐私->相机中打开访问权限")
+                DispatchQueue.main.async {
+                    if status {
+                        // 允许，验证麦克风权限
+                        self.authAudio()
+                    } else {
+                        // 拒绝
+                        self.showAuthResult("您已拒绝访问相机权限，如需使用请在设置->隐私->相机中打开访问权限")
+                    }
                 }
             }
             break
@@ -306,10 +308,12 @@ class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePh
         switch status {
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .audio) { (status) in
-                if status {
-                    self.authEnd()
-                } else {
-                    self.showAuthResult("您已拒绝访问麦克风权限，如需使用请在设置->隐私->麦克风中打开访问权限")
+                DispatchQueue.main.async {
+                    if status {
+                        self.authEnd()
+                    } else {
+                        self.showAuthResult("您已拒绝访问麦克风权限，如需使用请在设置->隐私->麦克风中打开访问权限")
+                    }
                 }
             }
             break
