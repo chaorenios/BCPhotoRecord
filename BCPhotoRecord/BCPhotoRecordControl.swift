@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol BCPhotoRecordControlDelegate {
+@objc protocol BCPhotoRecordControlDelegate {
     func shoot()
     func startRecording()
     func stopRecording()
@@ -117,9 +117,9 @@ public class BCPhotoRecordButton: UIView {
     var outerView = UIView(frame: CGRect.zero)
     var centerView = UIView(frame: CGRect.zero)
     var progressLayer = CAShapeLayer()
-    var progressLayerColor = UIColor(red: 0, green: 220.0/255.0, blue: 0, alpha: 1)
-    var progressLayerWidth: CGFloat = 5
-    var progressLayerDuration: CGFloat = 10
+    public var progressLayerColor = UIColor(red: 0, green: 220.0/255.0, blue: 0, alpha: 1)
+    public var progressLayerWidth: CGFloat = 5
+    public var progressLayerDuration: CGFloat = 10 // 最大秒数
     
     override init(frame: CGRect) {
         super.init(frame: frame)

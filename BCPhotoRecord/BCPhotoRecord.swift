@@ -15,36 +15,61 @@ public enum BCPhotoRecordOption {
     case record
 }
 
-typealias BCPhotoRecordCompletion = (UIImage?, URL?) -> Void
+public typealias BCPhotoRecordCompletion = (UIImage?, URL?) -> Void
 
 public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
 
-    var option = BCPhotoRecordOption.all
-    var completion: BCPhotoRecordCompletion?
+    public var option = BCPhotoRecordOption.all
+    public var completion: BCPhotoRecordCompletion?
     
-    class func show(option: BCPhotoRecordOption = .all, completion: @escaping BCPhotoRecordCompletion) {
+    // 显示方法
+    public class func show(option: BCPhotoRecordOption = .all, completion: @escaping BCPhotoRecordCompletion) {
         let pr = UIStoryboard(name: "PhotoRecord", bundle: nil).instantiateInitialViewController() as! BCPhotoRecord
         pr.option = option
         pr.completion = completion
         UIApplication.shared.keyWindow?.rootViewController?.present(pr, animated: true, completion: nil)
-     }
+    }
     
-    @IBOutlet weak var authLabel: UILabel!
-    @IBOutlet weak var authColseButton: UIButton!
+    // mov压缩并转mp4
+    public class func videoTransformMOVtoMP4(url videoUrl: URL, completion: @escaping (Bool, URL) -> Void) {
+        let asset = AVURLAsset(url: videoUrl, options: nil)
+        let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetMediumQuality)
+        exportSession?.shouldOptimizeForNetworkUse = true
+        let newName = NSUUID().uuidString
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(newName).mp4")
+        exportSession?.outputURL = url
+        exportSession?.outputFileType = AVFileType.mp4
+        exportSession?.shouldOptimizeForNetworkUse = true // 适合网络传输
+        exportSession?.exportAsynchronously(completionHandler: {
+            let status = exportSession!.status
+            if status == AVAssetExportSession.Status.unknown ||
+                status == AVAssetExportSession.Status.cancelled ||
+                status == AVAssetExportSession.Status.waiting ||
+                status == AVAssetExportSession.Status.exporting ||
+                status == AVAssetExportSession.Status.failed{
+                completion(false, url)
+            } else {
+                completion(true, url)
+            }
+        })
+    }
+    
+    @IBOutlet public weak var authLabel: UILabel!
+    @IBOutlet public weak var authColseButton: UIButton!
     
     // 预览图
-    @IBOutlet weak var previewView: UIView!
-    @IBOutlet weak var previewPhotoView: UIView!
-    @IBOutlet weak var previewPhotoImageView: UIImageView!
-    @IBOutlet weak var previewRecordView: UIView!
+    @IBOutlet public weak var previewView: UIView!
+    @IBOutlet public weak var previewPhotoView: UIView!
+    @IBOutlet public weak var previewPhotoImageView: UIImageView!
+    @IBOutlet public weak var previewRecordView: UIView!
     
     // 控制图
-    @IBOutlet weak var controlView: BCPhotoRecordControl!
+    @IBOutlet public weak var controlView: BCPhotoRecordControl!
     
-    var confirmPhoto: UIImage?
-    var confirmRecordURL: URL?
-    var avPlayer: AVPlayer?
-    var avPlayerLayer: AVPlayerLayer?
+    public var confirmPhoto: UIImage?
+    public var confirmRecordURL: URL?
+    public var avPlayer: AVPlayer?
+    public var avPlayerLayer: AVPlayerLayer?
     
     deinit {
         captureSession.stopRunning()
@@ -118,20 +143,20 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
         }
     }
     
-    public func startRecording() {
+    func startRecording() {
         let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("cMovie.mov")
         captureVideoOutput.startRecording(to: url, recordingDelegate: self)
     }
     
-    public func stopRecording() {
+    func stopRecording() {
         captureVideoOutput.stopRecording()
     }
     
-    public func close() {
+    func close() {
         dismiss(animated: true, completion: nil)
     }
     
-    public func back() {
+    func back() {
         // 拍照还原
         confirmPhoto = nil
         
@@ -151,7 +176,7 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
         }
     }
     
-    public func change() {
+    func change() {
         DispatchQueue.main.async {
             self.captureSession.stopRunning()
             let position = self.captureDeviceInput.device.position
@@ -179,7 +204,7 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
         }
     }
     
-    public func confirm() {
+    func confirm() {
         completion?(confirmPhoto, confirmRecordURL)
     }
     
