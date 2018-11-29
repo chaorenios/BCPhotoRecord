@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "BCPhotoRecord"
-  spec.version      = "1.0"
+  spec.version      = "1.0.1"
   spec.summary      = "拍照和拍短视频"
   spec.swift_version = "4.2"
 
