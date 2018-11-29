@@ -206,6 +206,7 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
     
     func confirm() {
         completion?(confirmPhoto, confirmRecordURL)
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - 加载拍摄
