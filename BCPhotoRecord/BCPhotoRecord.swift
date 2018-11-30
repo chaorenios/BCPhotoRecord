@@ -23,11 +23,11 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
     public var completion: BCPhotoRecordCompletion?
     
     // 显示方法
-    public class func show(option: BCPhotoRecordOption = .all, completion: @escaping BCPhotoRecordCompletion) {
+    public class func show(option: BCPhotoRecordOption = .all, with viewController: UIViewController, completion: @escaping BCPhotoRecordCompletion) {
         let pr = UIStoryboard(name: "PhotoRecord", bundle: nil).instantiateInitialViewController() as! BCPhotoRecord
         pr.option = option
         pr.completion = completion
-        UIApplication.shared.keyWindow?.rootViewController?.present(pr, animated: true, completion: nil)
+        viewController.present(pr, animated: true, completion: nil)
     }
     
     // mov压缩并转mp4
@@ -96,6 +96,9 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
         confirmPhoto = image
         previewPhotoView.isHidden = false
         previewPhotoImageView.image = image
+        DispatchQueue.main.async {
+            self.captureSession.stopRunning()
+        }
     }
     
     func previewVideo(_ url: URL) {
@@ -122,25 +125,25 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
     
     // MARK: - 拍摄控制
     public func shoot() {
-        DispatchQueue.main.async {
-            self.captureSession.stopRunning()
-        }
-        if#available(iOS 10, *) {
-            let output = captureImageOutput as! AVCapturePhotoOutput
-            let setting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecJPEG])
-            output.capturePhoto(with: setting, delegate: self)
+        let output = captureImageOutput as! AVCapturePhotoOutput
+        var setting: AVCapturePhotoSettings
+        if #available(iOS 11.0, *) {
+            setting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
         } else {
-            let output = captureImageOutput as! AVCaptureStillImageOutput
-            let connection = output.connection(with: .video)
-            output.captureStillImageAsynchronously(from: connection!) { [unowned self] (buffer, error) in
-                if buffer != nil {
-                    if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!) {
-                        let image = UIImage(data: imageData)
-                        self.previewPhoto(image!)
-                    }
-                }
-            }
+            setting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecJPEG])
         }
+        output.capturePhoto(with: setting, delegate: self)
+        // if ios.version < 10
+//        let output = captureImageOutput as! AVCaptureStillImageOutput
+//        let connection = output.connection(with: .video)
+//        output.captureStillImageAsynchronously(from: connection!) { [unowned self] (buffer, error) in
+//            if buffer != nil {
+//                if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!) {
+//                    let image = UIImage(data: imageData)
+//                    self.previewPhoto(image!)
+//                }
+//            }
+//        }
     }
     
     func startRecording() {
@@ -280,18 +283,15 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
     // MARK: - 拍摄完成代理方法
     /*拍照*/
     @available(iOS 11.0, *)
-    private func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+    public func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {
-            let image = UIImage(data: imageData)
-            previewPhoto(image!)
+            self.previewPhoto(UIImage(data: imageData)!)
         }
     }
     
-    @available(iOS 10.0, *)
-    private func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    public func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         if let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer) {
-            let image = UIImage(data: imageData)
-            previewPhoto(image!)
+            self.previewPhoto(UIImage(data: imageData)!)
         }
     }
     
