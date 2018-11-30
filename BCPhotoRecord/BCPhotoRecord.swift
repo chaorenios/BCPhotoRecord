@@ -73,7 +73,7 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
     public var avPlayerLayer: AVPlayerLayer?
     
     deinit {
-        captureSession.stopRunning()
+        captureSession?.stopRunning()
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         avPlayer?.pause()
         avPlayer = nil
