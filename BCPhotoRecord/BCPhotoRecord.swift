@@ -24,7 +24,8 @@ public class BCPhotoRecord: UIViewController, BCPhotoRecordControlDelegate, AVCa
     
     // 显示方法
     public class func show(option: BCPhotoRecordOption = .all, with viewController: UIViewController, completion: @escaping BCPhotoRecordCompletion) {
-        let pr = UIStoryboard(name: "PhotoRecord", bundle: nil).instantiateInitialViewController() as! BCPhotoRecord
+        let bundle = Bundle(for: self)
+        let pr = UIStoryboard(name: "PhotoRecord", bundle: bundle).instantiateInitialViewController() as! BCPhotoRecord
         pr.option = option
         pr.completion = completion
         viewController.present(pr, animated: true, completion: nil)

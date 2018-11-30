@@ -16,10 +16,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func openAction(_ sender: UIButton) {
-        BCPhotoRecord.show(option: .all) { (image, url) in
+        BCPhotoRecord.show(option: .all, with: self) { (images, url) in
             
         }
     }
-
 }
 
